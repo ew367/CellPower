@@ -1,4 +1,4 @@
-# BrainPowR
+# BrainPower
 
 The majority of epigenetic epidemiology studies to date have generated genome-wide profiles from bulk tissues (e.g. brain) however these are vulnerable to confounding from variation in cellular composition. FANSs technology now allows cells sorting prior to array-based methylation profiling, potentially allowing smaller differences to be detected. 
 
@@ -12,7 +12,7 @@ This package contains functions to calculate and plot power curves for cell spec
 
 The BrainPower package is available via GitHub and can be installed using the devtools package. However, there are some pre-requistite packages that may need to be installed from Bioconductor first.
 
-```install_github("ew367/BrainPowR")
+```install_github("ew367/BrainPower")
 ```
 
 
