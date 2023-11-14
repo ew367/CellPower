@@ -1,0 +1,63 @@
+---
+title: "BrainPower-vignette"
+author:
+  name: Emma Walker
+  affiliation: University of Exeter
+  email: E.M.Walker@exeter.ac.uk
+abstract: >
+  A tutorial on using the Brain Power package for power calculations of cell type specific array data
+output: 
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{BrainPower-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# How to use the BrainPower package
+
+## Installing CETYGO
+
+The BrainPower package is available via GitHub
+and can be installed using the devtools package. However, there are some 
+pre-requistite packages that need to be installed from Bioconductor first.
+
+#### 
+
+
+Now we can install BrainPower direct from GitHub.
+
+
+Once installed we can load the package.
+
+
+# Description of function arguments
+
+**betasOrSDs** - the name of an r matrix object containing either:
+  1) a normalised betas matrix of cell specific array data (CpGs as rows and samples as columns), or 
+  2) a matrix of Standard Deviations derived from a normalised betas matrix of cell specific array data (CpGs as rows and columns as cell types)
+
+**pheno** - the name of an r dataframe object containing the phenotype data that matches the normalised betas Matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.
+
+**nSamples** - only used in the r calcDiff() function. The number of samples in each group (default = 100))
+
+**meanDiff** - only used in the r calcSamples() function. The percentage difference in methylation you want to detect (default = 5).
+
+**dataType** - the data type input into the function. One of "betaMatrix" or "SDs"
+
+**binSize** - Number of bins. To improve package efficiency and speed, CpGs with similar standard deviations are binned together. Increasing this number may slightly improve the accuracy of the output, but will increase the processing time. 
+
+The plot below shows how the proportion of CpGs with > 0.8 power changes as binSize increases in the included sample data. The function binPlot() can be used to visualise this in other datasets. 
+
+
+
+
+#calculating the number of samples needed to detect a specified difference 
+
+allSamples <- calcSamples(allSDs, meanDiff = 5, dataType = "SDs")
+
+
+## add link to power calcualtions tutorial
+
+
