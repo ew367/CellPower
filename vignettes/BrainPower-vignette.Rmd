@@ -5,7 +5,7 @@ author:
   affiliation: University of Exeter
   email: E.M.Walker@exeter.ac.uk
 abstract: >
-  A tutorial on using the Brain Power package for power calculations of cell type specific array data
+  A tutorial for using the Brain Power package for power calculations of cell type specific array data
 output: 
   BiocStyle::html_document:
     toc_float: true

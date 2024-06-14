@@ -1,14 +1,14 @@
 #' Calculate the percentage difference in methylation detectable from the specified number of samples
 #'
 #' @param betasOrSDs - the name of an r matrix object containing either:
-# 1) a normalised betas matrix of cell specific array data (CpGs as rows and samples as columns), or
-# 2) a matrix of Standard Deviations derived from a normalised betas matrix of cell specific array data (CpGs as rows and columns as cell types)
-#' @param pheno -  the name of an r dataframe object containing the phenotype data that matches the normalised betas Matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.
+# 1) a normalised betas matrix of cell type specific DNA methylation data (sites as rows and samples as columns), or
+# 2) a matrix of standard deviations derived where each column represents a different cell type or condition (CpGs as rows and columns as cell types)
+#' @param pheno -  the name of an r dataframe object containing the phenotype data that matches the normalised betas matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.
 #' @param nSamples - Numeric value of the number of samples in each group (default = 100))
 #' @param dataType - Character string of the data type input into the function. One of "betaMatrix" or "SDs"
 #' @param binSize - Numeric value for the number of bins to use. To improve package efficiency and speed, CpGs with similar standard deviations are binned together. Increasing this number may slightly improve the accuracy of the output, but will increase the processing time (default = 500)
 #'
-#' @return - Returns a list containing power calculations for each cpg in each cell type
+#' @return - Returns a list of matrices with one matrix per cell type/condition. Each matrix contains the power for each site (columns) and different mean differences (rows).
 #' @export
 #'
 #' @examples

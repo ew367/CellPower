@@ -1,9 +1,11 @@
 #' plot power curve
 #'
-#' @param resFile - the dataframe object output from running calcProps()
-#' @param calcType - character string of the type of power calcualtion run. Either "samples" (if calcSamples() was used) or "difference" (if calcDiff() was used).
+#' @param resFile - the dataframe with proportions of probes with certain level of power output from running calcProps() where each column is a 
+#' cell type and each row is a different condition, e.g. different sample size or mean difference
+#' @param calcType - character string of the type of power calcualtion run. Either "samples" (if calcSamples() was used) or "difference" (if 
+#' calcDiff() was used).
 #'
-#' @return - power curve plot
+#' @return - ggplot object with power curve plot
 #' @export
 #'
 #' @examples
