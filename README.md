@@ -11,7 +11,7 @@ Within the package we provide reference data to enable users to perform calculat
 
 # Installation
 
-The BrainPower package is available via GitHub and can be installed using the devtools package. However, there are some pre-requistite packages that may need to be installed
+The CellPower package is available via GitHub and can be installed using the devtools package. However, there are some pre-requistite packages that may need to be installed
 first.
 
 ```
@@ -22,21 +22,21 @@ sapply(load.lib,require,character=TRUE) # load the packages
 
 library(devtools)
 
-install_github("ew367/BrainPower")
+install_github("ew367/CellPower")
 ```
 *code adapated from https://stackoverflow.com/questions/29041423/how-to-install-multiple-packages
 
 
 # Quick Start
 
-Once you have successfully installed the BrainPower package you can calculate either the number of samples needed to detect a specified mean difference or the level of difference detectable from the number of samples available, and plot the corresponding power curves. The power calculation functions can perform the analyses using either a matrix of normalised beta values and a corresponding phenotype file, or a matrix of standard deviations derived from the betas matrix.
+Once you have successfully installed the CellPower package you can calculate either the number of samples needed to detect a specified mean difference or the level of difference detectable from the number of samples available, and plot the corresponding power curves. The power calculation functions can perform the analyses using either a matrix of normalised beta values and a corresponding phenotype file, or a matrix of standard deviations derived from the betas matrix.
 
 
 
-Within the BrainPower package we have provided an example matrix of standard deviations for cell sorted brain data, which can be used as follows:
+Within the CellPower package we have provided an example matrix of standard deviations for cell sorted brain data, which can be used as follows:
 
 ```
-library(BrainPower)
+library(CellPower)
 
 data(allSDs) # load example data
 
