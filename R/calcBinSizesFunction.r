@@ -1,4 +1,54 @@
 
+## add in info here...
+
+calcBinSize <- function(betasOrSDs, pheno=NULL, nSamples=100, dataType, maxBins=800){
+  
+  if(dataType == "betaMatrix" & is.null(pheno)){
+    stop("a phenotype file must be supplied to use a betas matrix")
+  }
+  
+  
+  print(paste0("Number of samples to be tested: ", nSamples))
+  
+  if(dataType == "SDs"){
+    
+    allSDs <- betasOrSDs
+    
+  } else if (dataType == "betaMatrix"){
+    
+    allSDs <- c() # vector to hold allSDs from loop
+    
+    for(i in unique(pheno$Cell.type)){
+      
+      # subset to cell type
+      betasCell <- as.matrix(betasOrSDs[,colnames(betasOrSDs) %in% pheno[which(pheno$Cell.type == i), "Basename"]])
+      print(paste0(ncol(betasCell), " ", i, " samples found."))
+      
+      # calculate SD
+      betasSD <- apply(as.matrix(betasCell),1,sd)
+      
+      # return SDs
+      betasSD <- as.matrix(betasSD, labels = T)
+      colnames(betasSD) <- i
+      allSDs <- cbind(allSDs, betasSD)
+    }
+    
+  } else {
+    stop("dataType must be one of betaMatrix or SDs")
+  }
+  
+  
+  allSDs <- allSDs[complete.cases(allSDs),] # remove NA values from matrix
+  
+  
+  rm(list=setdiff(ls(), c("allSDs", "pheno", "nSamples", "binSize"))) # remove variables that are no longer needed
+  
+  
+  
+}
+
+
+
 
 #### bin SDs and plot power
 
@@ -19,7 +69,7 @@ allSDs <- allSDs[complete.cases(allSDs),]
 
 nSamples <- 100
 meanDiff <- 0.01
-nBins <- seq(20,800,20)
+nBins <- seq(20,maxBins,20)
 
 #start_time <- Sys.time()
 
