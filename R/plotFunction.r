@@ -19,7 +19,7 @@ plotPower <- function(resFile, calcType){
   if(calcType == "samples"){
 
     xlabs <- "N Samples (per group)"
-    xbreaks <- seq(0, max(allProps[, "n"]), 20)
+    xbreaks <- seq(0, max(allProps[, "n"]), signif(max(allProps[, "n"])/9, 1))
 
   } else if (calcType == "difference"){
 
