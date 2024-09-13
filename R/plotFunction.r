@@ -19,7 +19,7 @@ plotPower <- function(resFile, calcType){
   if(calcType == "samples"){
 
     xlabs <- "N Samples (per group)"
-    xbreaks <- seq(0, max(allProps[, "n"]), 20)
+    xbreaks <- seq(0, max(allProps[, "n"]), signif(max(allProps[, "n"])/9, 1))
 
   } else if (calcType == "difference"){
 
@@ -36,7 +36,7 @@ plotPower <- function(resFile, calcType){
   # create plot
   p <- ggplot(plotdf, aes(x = n, y = value, colour = variable))+
     geom_line()+
-    labs(x = xlabs, y = "Proportion CpG's > 80% power", color = "cell types")+
+    labs(x = xlabs, y = "Proportion CpG's > 80% power", color = "Cell Type")+
     scale_x_continuous(breaks = xbreaks)+
     scale_y_continuous(breaks = seq(0, 1, by = 0.2))+
 
