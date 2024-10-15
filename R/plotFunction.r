@@ -19,13 +19,13 @@ plotPower <- function(resFile, calcType){
   if(calcType == "samples"){
 
     xlabs <- "N Samples (per group)"
-    xbreaks <- seq(0, max(allProps[, "n"]), signif(max(allProps[, "n"])/9, 1))
+    xbreaks <- seq(0, max(resFile[, "n"]), signif(max(resFile[, "n"])/9, 1))
 
   } else if (calcType == "difference"){
 
     resFile$n <- resFile$n*100
     xlabs <- "Mean Difference (%)"
-    xbreaks <- seq(0, 10, 0.5)
+    xbreaks <- seq(0, 10, 1)
 
   } else {
     stop("calcType must be one of 'samples' or 'difference'")
