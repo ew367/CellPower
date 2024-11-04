@@ -10,6 +10,12 @@
 #'
 #' @return - Returns a list of matrices with one matrix per cell type/condition. Each matrix contains the power for each site (columns) and different mean differences (rows).
 #' @export
+#' @import pwr
+#' @import doParallel
+#' @import foreach
+#' @importFrom dplyr mutate
+#' @importFrom dplyr left_join
+
 #'
 #' @examples
 #' allSamples <- calcDiff(allSDs, dataType = "SDs")

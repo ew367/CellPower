@@ -7,6 +7,8 @@
 #'
 #' @return - ggplot object with power curve plot
 #' @export
+#' @import ggplot2
+#' @importFrom reshape2 melt
 #'
 #' @examples
 #' myPlot <- plotPower(allProps, "samples")
