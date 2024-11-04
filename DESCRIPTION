@@ -12,8 +12,10 @@ License: GPL-3
 URL: https://github.com/ew367/CellPower
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: gzip
 Imports:
     doParallel,
+    parallel,
     dplyr,
     foreach,
     ggplot2,
@@ -21,5 +23,6 @@ Imports:
     reshape2,
 Suggests: 
     knitr
+Depends: R (>= 2.10)
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

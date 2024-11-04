@@ -15,6 +15,3 @@ calcProps(allCellRes)
 \description{
 Calculates the proportion of probes (CpGs) with power > 0.8
 }
-\examples{
-allProps <-calcProps(allSamples)
-}

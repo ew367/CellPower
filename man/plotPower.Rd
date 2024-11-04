@@ -19,6 +19,3 @@ calcDiff() was used).}
 \description{
 plot power curve
 }
-\examples{
-myPlot <- plotPower(allProps, "samples")
-}

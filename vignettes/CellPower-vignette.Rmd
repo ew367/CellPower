@@ -1,11 +1,11 @@
 ---
-title: "BrainPower-vignette"
+title: "CellPower-vignette"
 author:
   name: Emma Walker
   affiliation: University of Exeter
   email: E.M.Walker@exeter.ac.uk
 abstract: >
-  A tutorial for using the Brain Power package for power calculations of cell type specific array data
+  A tutorial for using the CellPower package for power calculations of cell type specific array data
 output: 
   BiocStyle::html_document:
     toc_float: true
@@ -15,18 +15,33 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# How to use the BrainPower package
+```{r setup, include=FALSE}
 
-## Installing CETYGO
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
 
-The BrainPower package is available via GitHub
+# Now install BiocStyle
+BiocManager::install("BiocStyle")
+
+library(BiocStyle)
+
+```
+
+
+
+# How to use the CellPower package
+
+## Installing CellPower
+
+The CellPower package is available via GitHub
 and can be installed using the devtools package. However, there are some 
 pre-requistite packages that need to be installed from Bioconductor first.
 
 #### 
 
 
-Now we can install BrainPower direct from GitHub.
+Now we can install CellPower direct from GitHub.
 
 
 Once installed we can load the package.
@@ -56,6 +71,17 @@ The plot below shows how the proportion of CpGs with > 0.8 power changes as binS
 #calculating the number of samples needed to detect a specified difference 
 
 allSamples <- calcSamples(allSDs, meanDiff = 5, dataType = "SDs")
+
+
+#calculating the proportion of CpGs with > 0.8 power
+
+allProps <- calcProps(allSamples)
+
+
+
+#visualising the proportion of CpGs with > 0.8 power
+
+myPlot <- plotPower(allProps, "samples")
 
 
 ## add link to power calcualtions tutorial

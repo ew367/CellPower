@@ -15,11 +15,16 @@
 #' @import foreach
 #' @importFrom dplyr mutate
 #' @importFrom dplyr left_join
-
+#' @importFrom dplyr ntile
+#' @importFrom stats complete.cases
+#' @importFrom parallel detectCores
+#' @importFrom parallel makeForkCluster
+#' @importFrom parallel clusterExport
 #'
 #' @examples
 #' allSamples <- calcDiff(allSDs, dataType = "SDs")
-#' allSamples <- calcDiff(betas, phenoFile, nSamples = 100, dataType = "betaMatrix")
+
+# or for beta values (not supplied in this example): allSamples <- calcDiff(betas, phenoFile, nSamples = 100, dataType = "betaMatrix")
 
 
 
@@ -74,7 +79,7 @@ calcDiff <- function(betasOrSDs, pheno=NULL, nSamples=100, dataType, binSize = 5
 
 
     # bin data
-    betasSD <- as.data.frame(betasSD) %>% mutate(points_bin = ntile(betasSD, n=binSize))
+    betasSD <- as.data.frame(betasSD) %>% dplyr::mutate(points_bin = dplyr::ntile(betasSD, n=binSize))
 
     meanSDs <- c()
     for(j in unique(betasSD$points_bin)){
@@ -83,7 +88,7 @@ calcDiff <- function(betasOrSDs, pheno=NULL, nSamples=100, dataType, binSize = 5
     }
 
     for(diff in meanDiff){
-      power1 <- c(power1, pwr.t.test(d=diff/meanSDs,n=nSamples,sig.level=9e-8,type="two.sample",alternative="two.sided")$power)
+      power1 <- c(power1, pwr::pwr.t.test(d=diff/meanSDs,n=nSamples,sig.level=9e-8,type="two.sample",alternative="two.sided")$power)
     }
     power1 <- as.data.frame(matrix(power1, nrow=length(meanDiff), byrow = T))
 
@@ -95,10 +100,21 @@ calcDiff <- function(betasOrSDs, pheno=NULL, nSamples=100, dataType, binSize = 5
 
   print("Setting up parallel processors...")
 
-  no_cores <- detectCores() - 1
-  cl <- makeForkCluster(no_cores)
-  registerDoParallel(cl)
-  clusterExport(cl, c("allSDs", "nSamples", "binSize"), envir=environment())
+    require(dplyr)
+    require(foreach)
+    require(doParallel)
+
+chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+
+if (nzchar(chk) && chk == "TRUE") {
+    no_cores <- 2L
+} else {
+    no_cores <- parallel::detectCores() - 1
+}
+
+  cl <- parallel::makeForkCluster(no_cores)
+  doParallel::registerDoParallel(cl)
+  parallel::clusterExport(cl, c("allSDs", "nSamples", "binSize"), envir=environment())
 
   meanDiff <- seq(0.001, 0.1, 0.001)
   results <- foreach(i = colnames(allSDs)) %dopar% {powerCpG(allSDs[,i])}

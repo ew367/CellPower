@@ -25,5 +25,4 @@ Calculate the number of samples needed in each group to have power to detect the
 }
 \examples{
 allSamples <- calcSamples(allSDs, dataType = "SDs")
-allSamples <- calcSamples(betas, phenoFile, meanDiff = 5, dataType = "betaMatrix")
 }
