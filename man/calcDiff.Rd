@@ -25,5 +25,4 @@ Calculate the percentage difference in methylation detectable from the specified
 }
 \examples{
 allSamples <- calcDiff(allSDs, dataType = "SDs")
-allSamples <- calcDiff(betas, phenoFile, nSamples = 100, dataType = "betaMatrix")
 }

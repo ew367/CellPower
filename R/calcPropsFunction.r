@@ -6,8 +6,11 @@
 #' @return - a dataframe containing the proportion of probes with power > 0.8 where rows are either mean differences or number of samples tested, and columns are each cell type
 #' @export
 #'
-#' @examples
-#' allProps <-calcProps(allSamples)
+
+# Example usage:
+
+# allSamples <- calcSamples(allSDs, dataType = "SDs")
+# allProps <-calcProps(allSamples)
 
 
 calcProps <- function(allCellRes){

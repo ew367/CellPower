@@ -10,10 +10,21 @@
 #'
 #' @return - Returns a list of matrices with one matrix per cell type/condition. Each matrix contains the power for each site (columns) and different sample sizes (rows).
 #' @export
+#' @import pwr
+#' @import doParallel
+#' @import foreach
+#' @importFrom dplyr mutate
+#' @importFrom dplyr left_join
+#' @importFrom dplyr ntile
+#' @importFrom stats complete.cases
+#' @importFrom parallel detectCores
+#' @importFrom parallel makeForkCluster
+#' @importFrom parallel clusterExport
 #'
 #' @examples
 #' allSamples <- calcSamples(allSDs, dataType = "SDs")
-#' allSamples <- calcSamples(betas, phenoFile, meanDiff = 5, dataType = "betaMatrix")
+#
+# or for beta values (not supplied in this example): allSamples <- calcSamples(betas, phenoFile, meanDiff = 5, dataType = "betaMatrix")
 
 
 calcSamples <- function(betasOrSDs, pheno=NULL, meanDiff=5, dataType, binSize = 500){
@@ -85,13 +96,13 @@ calcSamples <- function(betasOrSDs, pheno=NULL, meanDiff=5, dataType, binSize = 
 
   #define function to calculate power for each sample size
   powerCpG <- function(betasSD){
-    library(pwr)
+    require(pwr)
     power1 <- c()
     Samples <- seq(nSamples/100, nSamples, nSamples/100)
     meandiffdec <- meanDiffDec
 
     # bin data
-    betasSD <- as.data.frame(betasSD) %>% mutate(points_bin = ntile(betasSD, n=binSize))
+    betasSD <- as.data.frame(betasSD) %>% dplyr::mutate(points_bin = dplyr::ntile(betasSD, n=binSize))
 
     meanSDs <- c()
     for(j in unique(betasSD$points_bin)){
@@ -102,7 +113,7 @@ calcSamples <- function(betasOrSDs, pheno=NULL, meanDiff=5, dataType, binSize = 
 
     for(sample in Samples){
 
-      power1 <- c(power1, pwr.t.test(n=sample, d = meandiffdec/(meanSDs), sig.level = 9e-8,type="two.sample",alternative="two.sided")$power)
+      power1 <- c(power1, pwr::pwr.t.test(n=sample, d = meandiffdec/(meanSDs), sig.level = 9e-8,type="two.sample",alternative="two.sided")$power)
 
       }
 
@@ -115,10 +126,22 @@ calcSamples <- function(betasOrSDs, pheno=NULL, meanDiff=5, dataType, binSize = 
 
   print("Setting up parallel processors...")
 
-    no_cores <- detectCores() - 1
-    cl <- makeForkCluster(no_cores)
-    registerDoParallel(cl)
-    clusterExport(cl, c("allSDs", "nSamples", "meanDiffDec", "binSize"), envir=environment())
+  require(dplyr)
+  require(foreach)
+  require(doParallel)
+
+  
+chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+
+if (nzchar(chk) && chk == "TRUE") {
+    no_cores <- 2L
+} else {
+    no_cores <- parallel::detectCores() - 1
+}
+
+    cl <- parallel::makeForkCluster(no_cores)
+    doParallel::registerDoParallel(cl)
+    parallel::clusterExport(cl, c("allSDs", "nSamples", "meanDiffDec", "binSize"), envir=environment())
 
 
     samples <- seq(nSamples/100, nSamples, nSamples/100)
