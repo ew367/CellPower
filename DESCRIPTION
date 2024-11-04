@@ -1,5 +1,5 @@
-Package: BrainPower
-Title: power calculations for brain cell type data
+Package: CellPower
+Title: Power calculations for brain cell type data
 Version: 0.1.0
 Authors@R: 
     person(given = "Emma",
@@ -7,9 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "E.M.Walker@exeter.ac.uk",
            comment = c(ORCID = "0000-0003-2222-4577"))
-Description: BrainPower builds on the 'pwr' pacakge to perform power calculations on cell sorted brain methylation data (Illumina Array). Users can either specify the number of samples in each group (cell type) and calculate the mean difference in methylation detectable with this number of samples, or specify a target mean difference and calcualte the number of samples in each group (cell type) required.
+Description: CellPower builds on the 'pwr' pacakge to perform power calculations on cell sorted brain methylation data (Illumina Array). Users can either specify the number of samples in each group (cell type) and calculate the mean difference in methylation detectable with this number of samples, or specify a target mean difference and calcualte the number of samples in each group (cell type) required.
 License: GPL-3
-URL: https://github.com/ew367/BrainPower
+URL: https://github.com/ew367/CellPower
 Encoding: UTF-8
 LazyData: true
 Imports:

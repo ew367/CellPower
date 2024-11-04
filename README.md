@@ -61,7 +61,7 @@ myPlot <- plotPower(allProps, "difference")
 ```
 
 
-A longer tutorial that explores the full functionality of the BrainPower package will be available shortly.
+A longer tutorial that explores the full functionality of the CellPower package will be available shortly.
 
 
 # Acknowledgements

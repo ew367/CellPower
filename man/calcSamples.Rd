@@ -9,16 +9,16 @@ calcSamples(betasOrSDs, pheno = NULL, meanDiff = 5, dataType, binSize = 500)
 \arguments{
 \item{betasOrSDs}{- the name of an r matrix object containing either:}
 
-\item{pheno}{-  the name of an r dataframe object containing the phenotype data that matches the normalised betas Matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.}
+\item{pheno}{-  the name of an r dataframe object containing the phenotype data that matches the normalised betas matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.}
 
 \item{meanDiff}{- Numeric value of the percentage difference in methylation you want to detect (default = 5)}
 
-\item{dataType}{- Character string of the data type input into the function. One of "betaMatrix" or "SDs"}
+\item{dataType}{- Character string of the data type input provided to the betasOrSDs argument. One of "betaMatrix" or "SDs"}
 
-\item{binSize}{- Numeric value for the number of bins to use. To improve package efficiency and speed, CpGs with similar standard deviations are binned together. Increasing this number may slightly improve the accuracy of the output, but will increase the processing time (default = 500)}
+\item{binSize}{- Numeric value for the number of bins to use. To improve package efficiency and speed, CpGs with similar standard deviations are binned together. Increasing this number may improve the accuracy of the output, but will increase the processing time (default = 500)}
 }
 \value{
-- Returns a list containing power calculations in each cell type
+- Returns a list of matrices with one matrix per cell type/condition. Each matrix contains the power for each site (columns) and different sample sizes (rows).
 }
 \description{
 Calculate the number of samples needed in each group to have power to detect the specified mean difference

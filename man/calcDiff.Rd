@@ -9,7 +9,7 @@ calcDiff(betasOrSDs, pheno = NULL, nSamples = 100, dataType, binSize = 500)
 \arguments{
 \item{betasOrSDs}{- the name of an r matrix object containing either:}
 
-\item{pheno}{-  the name of an r dataframe object containing the phenotype data that matches the normalised betas Matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.}
+\item{pheno}{-  the name of an r dataframe object containing the phenotype data that matches the normalised betas matrix, with a column called 'Cell.type' specifying the cell type of each sample. MUST BE SUPPLIED IN ORDER TO USE A NORMALISED BETAS MATRIX.}
 
 \item{nSamples}{- Numeric value of the number of samples in each group (default = 100))}
 
@@ -18,7 +18,7 @@ calcDiff(betasOrSDs, pheno = NULL, nSamples = 100, dataType, binSize = 500)
 \item{binSize}{- Numeric value for the number of bins to use. To improve package efficiency and speed, CpGs with similar standard deviations are binned together. Increasing this number may slightly improve the accuracy of the output, but will increase the processing time (default = 500)}
 }
 \value{
-- Returns a list containing power calculations for each cpg in each cell type
+- Returns a list of matrices with one matrix per cell type/condition. Each matrix contains the power for each site (columns) and different mean differences (rows).
 }
 \description{
 Calculate the percentage difference in methylation detectable from the specified number of samples

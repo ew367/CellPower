@@ -7,12 +7,14 @@
 plotPower(resFile, calcType)
 }
 \arguments{
-\item{resFile}{- the dataframe object output from running calcProps()}
+\item{resFile}{- the dataframe with proportions of probes with certain level of power output from running calcProps() where each column is a 
+cell type and each row is a different condition, e.g. different sample size or mean difference}
 
-\item{calcType}{- character string of the type of power calcualtion run. Either "samples" (if calcSamples() was used) or "difference" (if calcDiff() was used).}
+\item{calcType}{- character string of the type of power calcualtion run. Either "samples" (if calcSamples() was used) or "difference" (if 
+calcDiff() was used).}
 }
 \value{
-- power curve plot
+- ggplot object with power curve plot
 }
 \description{
 plot power curve
