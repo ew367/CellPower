@@ -19,7 +19,6 @@ Imports:
     ggplot2,
     pwr,
     reshape2,
-    data.table
 Suggests: 
     knitr
 VignetteBuilder: knitr

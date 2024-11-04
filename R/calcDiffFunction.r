@@ -68,7 +68,7 @@ calcDiff <- function(betasOrSDs, pheno=NULL, nSamples=100, dataType, binSize = 5
 
   #define function to calculate power for each sample size
   powerCpG <- function(betasSD){
-    library(pwr)
+    require(pwr)
     power1 <- c()
     meanDiff <- seq(0.001, 0.1, 0.001)
 

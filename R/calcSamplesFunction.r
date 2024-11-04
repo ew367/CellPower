@@ -90,7 +90,7 @@ calcSamples <- function(betasOrSDs, pheno=NULL, meanDiff=5, dataType, binSize = 
 
   #define function to calculate power for each sample size
   powerCpG <- function(betasSD){
-    library(pwr)
+    require(pwr)
     power1 <- c()
     Samples <- seq(nSamples/100, nSamples, nSamples/100)
     meandiffdec <- meanDiffDec
